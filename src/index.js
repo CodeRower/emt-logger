@@ -39,7 +39,7 @@ const logger = winston.createLogger({
             maxSize: '20m',
             maxFiles: '15d',
             prepend: true,
-            level: env === 'error'
+            level: 'error'
         })
 
     ]
