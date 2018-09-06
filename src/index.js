@@ -27,10 +27,21 @@ const logger = winston.createLogger({
             timestamp: tsFormat,
             zippedArchive: true,
             maxSize: '20m',
-            maxFiles: '15d',
+            maxFiles: '7d',
             prepend: true,
             level: env === 'development' ? 'verbose' : 'info'
+        }),
+        new (require('winston-daily-rotate-file'))({
+            filename: `${logDir}/${logFile}-%DATE%.errors.log`,
+            datePattern: 'YYYY-MM-DD',
+            timestamp: tsFormat,
+            zippedArchive: true,
+            maxSize: '20m',
+            maxFiles: '15d',
+            prepend: true,
+            level: env === 'error'
         })
+
     ]
 });
 
