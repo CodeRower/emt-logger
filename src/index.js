@@ -3,7 +3,7 @@ const fs = require('fs');
 const env = process.env.NODE_ENV || 'development';
 const logDir = process.env.LOG_DIR || 'log';
 const logFile = process.env.LOG_FILE || 'log';
-var filePath = "";
+
 // Create the log directory if it does not exist
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
@@ -45,9 +45,9 @@ const logger = winston.createLogger({
     ]
 });
 
-function logError(method, sessionId, requestId, message) {
+function logError(file, method, sessionId, requestId, message) {
     logger.error({
-        file: filePath,
+        file: file,
         method: method,
         sessionId: sessionId,
         requestId: requestId,
@@ -55,9 +55,9 @@ function logError(method, sessionId, requestId, message) {
     });
 }
 
-function logInfo(method, sessionId, requestId, message) {
+function logInfo(file, method, sessionId, requestId, message) {
     logger.info({
-        file: filePath,
+        file: file,
         method: method,
         sessionId: sessionId,
         requestId: requestId,
@@ -65,22 +65,17 @@ function logInfo(method, sessionId, requestId, message) {
     });
 }
 
-function logVerbose(method, sessionId, requestId, message) {
+function logVerbose(file, method, sessionId, requestId, message) {
     logger.verbose({
-        file: filePath,
+        file: file,
         method: method,
         sessionId: sessionId,
         requestId: requestId,
         message: message
     });
-}
-
-function init(file) {
-    filePath = file
 }
 
 module.exports = {
-    init: init,
     logInfo: logInfo,
     logError: logError,
     logVerbose: logVerbose
