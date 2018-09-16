@@ -5,6 +5,9 @@ const logDir = process.env.LOG_DIR || 'log';
 const logFile = process.env.LOG_FILE || 'log';
 
 // Create the log directory if it does not exist
+console.log('--------------- LOG FILE WILL BE AT ---------------');
+console.log(`${logDir}/${logFile}.log for ${env} environment`);
+console.log('----------------------------------------------------');
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
 }
