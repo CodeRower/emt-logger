@@ -3,6 +3,7 @@ const fs = require('fs');
 const env = process.env.NODE_ENV || 'development';
 const logDir = process.env.LOG_DIR || 'log';
 const logFile = process.env.LOG_FILE || 'log';
+const logLevels = process.env.LOG_LEVELS || 'error';
 
 // Create the log directory if it does not exist
 console.log('--------------- LOG FILE WILL BE AT ---------------');
@@ -49,6 +50,7 @@ const logger = winston.createLogger({
 });
 
 function logError(file, method, sessionId, requestId, message) {
+    if(logLevels.indexOf('error')>-1)
     logger.error({
         file: file,
         method: method,
@@ -59,6 +61,7 @@ function logError(file, method, sessionId, requestId, message) {
 }
 
 function logInfo(file, method, sessionId, requestId, message) {
+    if(logLevels.indexOf('info')>-1)
     logger.info({
         file: file,
         method: method,
@@ -69,6 +72,7 @@ function logInfo(file, method, sessionId, requestId, message) {
 }
 
 function logVerbose(file, method, sessionId, requestId, message) {
+    if(logLevels.indexOf('verbose')>-1)
     logger.verbose({
         file: file,
         method: method,
